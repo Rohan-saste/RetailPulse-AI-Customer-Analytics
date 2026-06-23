@@ -67,9 +67,10 @@ def inject_premium_ui():
         header {visibility: hidden;}
         
         /* Sidebar styling */
-        section[data-testid="stSidebar"] {
+        section[data-testid="stSidebar"],
+        section[data-testid="stSidebar"] > div:first-child {
             background-color: #0F172A !important;
-            border-right: 1px solid #1E293B;
+            border-right: 1px solid #1E293B !important;
             width: 280px !important;
         }
         
