@@ -179,6 +179,8 @@ def load_data():
     base = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_csv(os.path.join(base, "../data/processed/clean_retail_data.csv"),
                      parse_dates=['InvoiceDate'])
+    if len(df) > 50000:
+        df = df.sample(50000, random_state=42)
     df['Year']    = df['InvoiceDate'].dt.year
     df['Month']   = df['InvoiceDate'].dt.month
     df['Hour']    = df['InvoiceDate'].dt.hour
@@ -227,7 +229,6 @@ df = load_data()
 segments = load_segments()
 forecast = load_forecast()
 churn_df = load_churn()
-model, scaler = load_churn_model()
 
 # Setup stylesheet
 inject_premium_ui()
@@ -866,7 +867,8 @@ elif page == "🔮 Demand Forecast Panel":
 # ════════════════════════════════════════════════════════════
 # ⚠️ NAVIGATION PAGE: CHURN RISK INTELLIGENCE
 # ════════════════════════════════════════════════════════════
-elif page == "⚠️ Churn Risk Intelligence":
+elif page == "🚨 Churn Risk Intelligence":
+    model, scaler = load_churn_model()
     st.markdown("""
     <div class="header-banner">
         <h1 class="header-title">Customer Churn Risk Panel</h1>
