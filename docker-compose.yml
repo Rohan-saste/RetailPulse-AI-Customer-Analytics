@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # ── PostgreSQL Database ────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: retailpulse
+      POSTGRES_USER: retailpulse
+      POSTGRES_PASSWORD: retailpulse_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U retailpulse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ────────────────────────────────────────
+  server:
+    build: ./server
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://retailpulse:retailpulse_secret@db:5432/retailpulse
+      DATA_MODE: csv
+      JWT_SECRET: change-this-to-a-strong-random-secret
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      DEBUG: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./server/data:/app/data
+      - ./server/ml_models:/app/ml_models
+
+  # ── React Frontend ────────────────────────────────────────
+  client:
+    build: ./client
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: http://localhost:8000/api/v1
+    depends_on:
+      - server
+
+volumes:
+  pgdata:

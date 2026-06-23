@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-textMain antialiased;
+  }
+}
+
+@layer components {
+  .insight-box {
+    @apply bg-slate-200/40 border-l-4 border-l-blue-500 rounded-lg border-t border-r border-b border-slate-200 p-5 my-5;
+  }
+}

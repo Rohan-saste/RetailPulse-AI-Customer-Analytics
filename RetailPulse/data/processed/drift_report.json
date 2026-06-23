@@ -1,0 +1,31 @@
+{
+    "status": "Success",
+    "reference_period": "2009-12-01 to 2010-11-30",
+    "reference_rows": 386732,
+    "current_period": "2010-12-01 to 2011-12-09",
+    "current_rows": 392693,
+    "metrics": {
+        "Quantity": {
+            "ks_statistic": 0.0194,
+            "p_value": 4.1044322854411256e-64,
+            "drift_detected": true,
+            "ref_mean": 13.865,
+            "curr_mean": 13.12
+        },
+        "Price": {
+            "ks_statistic": 0.04586,
+            "p_value": 0.0,
+            "drift_detected": true,
+            "ref_mean": 3.312,
+            "curr_mean": 3.126
+        },
+        "Revenue": {
+            "ks_statistic": 0.01773,
+            "p_value": 1.2939924156029156e-53,
+            "drift_detected": true,
+            "ref_mean": 21.947,
+            "curr_mean": 22.631
+        }
+    },
+    "drift_detected": true
+}
