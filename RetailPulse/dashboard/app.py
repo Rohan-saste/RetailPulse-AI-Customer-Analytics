@@ -68,23 +68,23 @@ def inject_premium_ui():
         
         /* Sidebar styling */
         section[data-testid="stSidebar"],
-        section[data-testid="stSidebar"] > div:first-child {
-            background-color: #0F172A !important;
-            border-right: 1px solid #1E293B !important;
+        section[data-testid="stSidebar"] > div {
+            background-color: #F8FAFC !important;
+            border-right: 1px solid #E2E8F0 !important;
             width: 280px !important;
         }
         
         section[data-testid="stSidebar"] h1, 
         section[data-testid="stSidebar"] h2, 
         section[data-testid="stSidebar"] h3 {
-            color: #FFFFFF !important;
+            color: #0F172A !important;
             text-shadow: none !important;
         }
         
         /* Modern Sidebar Navigation styling */
         section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] *,
         section[data-testid="stSidebar"] .stRadio label * {
-            color: #CBD5E1 !important;
+            color: #334155 !important;
             font-weight: 600;
             text-shadow: none !important;
         }
@@ -96,15 +96,15 @@ def inject_premium_ui():
             transition: all 0.2s ease;
         }
         section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(37, 99, 235, 0.05);
             transform: translateX(4px);
         }
         /* Hide the actual radio circle for a clean button look */
+        .stRadio div[role="radiogroup"] label > div:first-child {
+            display: none !important;
+        }
         section[data-testid="stSidebar"] div[role="radiogroup"] > label div[data-testid="stMarkdownContainer"] {
             margin-left: 0px !important;
-        }
-        section[data-testid="stSidebar"] div[role="radiogroup"] > label span[data-baseweb="radio"] {
-            display: none !important;
         }
         
         /* Main background */
@@ -227,6 +227,7 @@ def load_data():
     df['Month']   = df['InvoiceDate'].dt.month
     df['Hour']    = df['InvoiceDate'].dt.hour
     df['Weekday'] = df['InvoiceDate'].dt.day_name()
+    df['InvoiceDate_date'] = df['InvoiceDate'].dt.date # Precomputed for fast filtering
     return df
 
 @st.cache_data
@@ -466,7 +467,7 @@ if selected_years:
 
 if len(date_range) == 2:
     start, end = date_range
-    filtered_df = filtered_df[(filtered_df['InvoiceDate'].dt.date >= start) & (filtered_df['InvoiceDate'].dt.date <= end)]
+    filtered_df = filtered_df[(filtered_df['InvoiceDate_date'] >= start) & (filtered_df['InvoiceDate_date'] <= end)]
 
 # Load Segment Details for filtered profiles
 if segments is not None:
@@ -476,11 +477,13 @@ if segments is not None:
 else:
     filtered_segments = None
 
-# Calculate Sparkline Data Arrays
-monthly_revenue_arr = filtered_df.groupby(['Year','Month'])['Revenue'].sum().values
-monthly_orders_arr = filtered_df.groupby(['Year','Month'])['Invoice'].nunique().values
-monthly_customers_arr = filtered_df.groupby(['Year','Month'])['Customer ID'].nunique().values
-monthly_aov_arr = (filtered_df.groupby(['Year','Month'])['Revenue'].sum() / filtered_df.groupby(['Year','Month'])['Invoice'].nunique()).values
+# Calculate Sparkline Data Arrays efficiently
+grouped_ym = filtered_df.groupby(['Year','Month'])
+monthly_revenue_arr = grouped_ym['Revenue'].sum().values
+monthly_orders_arr = grouped_ym['Invoice'].nunique().values
+monthly_customers_arr = grouped_ym['Customer ID'].nunique().values
+# Avoid division by zero
+monthly_aov_arr = np.divide(monthly_revenue_arr, monthly_orders_arr, out=np.zeros_like(monthly_revenue_arr, dtype=float), where=monthly_orders_arr!=0)
 
 # ════════════════════════════════════════════════════════════
 # 🏠 NAVIGATION PAGE: EXECUTIVE DASHBOARD
