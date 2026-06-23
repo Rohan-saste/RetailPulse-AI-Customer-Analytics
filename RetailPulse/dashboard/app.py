@@ -79,10 +79,29 @@ def inject_premium_ui():
             color: #FFFFFF !important;
         }
         
+        /* Modern Sidebar Navigation styling */
         section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] *,
         section[data-testid="stSidebar"] .stRadio label * {
             color: #1E293B !important;
             font-weight: 600;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label {
+            background: transparent;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateX(4px);
+        }
+        /* Hide the actual radio circle for a clean button look */
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label div[data-testid="stMarkdownContainer"] {
+            margin-left: 0px !important;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label span[data-baseweb="radio"] {
+            display: none !important;
         }
         
         /* Main background */
@@ -92,17 +111,18 @@ def inject_premium_ui():
         
         /* Premium Card Container & metric containers */
         [data-testid="metric-container"], div[data-testid="stVerticalBlockBorderWrapper"] {
-            background: #FFFFFF !important;
-            border: 1px solid #E2E8F0 !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(226, 232, 240, 0.8) !important;
             border-radius: 16px !important;
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.08) !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01) !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             padding: 15px !important;
         }
         div[data-testid="stVerticalBlockBorderWrapper"]:hover {
-            transform: translateY(-3px) !important;
-            border-color: #2563EB !important;
-            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1) !important;
+            transform: translateY(-4px) !important;
+            border-color: #3B82F6 !important;
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15) !important;
         }
         
         /* Text color overrides inside main containers */
@@ -111,34 +131,52 @@ def inject_premium_ui():
         }
         
         h1, h2, h3 {
-            color: #1E293B !important;
+            color: #0F172A !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.5px !important;
         }
         
-        /* Banner Header Style */
+        /* Glassmorphism Banner Header Style */
         .header-banner {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid #1E293B;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-banner::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.2), transparent 40%);
+            pointer-events: none;
         }
         .header-title {
-            font-size: 38px;
+            font-size: 42px;
             font-weight: 800;
             color: #FFFFFF !important;
             margin: 0;
             background: linear-gradient(to right, #60A5FA, #C084FC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
         }
         .header-subtitle {
-            font-size: 16px;
-            color: #94A3B8 !important;
-            margin-top: 10px;
+            font-size: 17px;
+            color: #CBD5E1 !important;
+            margin-top: 12px;
             margin-bottom: 0;
             font-weight: 400;
+            position: relative;
+            z-index: 1;
         }
         
         /* Business Insight Box */
