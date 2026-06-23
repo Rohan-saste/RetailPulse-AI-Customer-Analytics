@@ -212,6 +212,10 @@ def inject_premium_ui():
             border: 1px solid #1E293B;
             margin-bottom: 25px;
         }
+        
+        section[data-testid="stSidebar"] .sidebar-profile h2 {
+            color: #FFFFFF !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 
