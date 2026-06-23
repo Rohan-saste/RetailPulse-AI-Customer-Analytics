@@ -81,8 +81,8 @@ def inject_premium_ui():
         
         section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] *,
         section[data-testid="stSidebar"] .stRadio label * {
-            color: #E2E8F0 !important;
-            font-weight: 500;
+            color: #1E293B !important;
+            font-weight: 600;
         }
         
         /* Main background */
@@ -243,8 +243,8 @@ def make_sparkline(data, color="#3B82F6"):
         margin=dict(l=0, r=0, t=0, b=0),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        height=35,
-        width=110
+        height=80,
+        width=80
     )
     return fig
 
