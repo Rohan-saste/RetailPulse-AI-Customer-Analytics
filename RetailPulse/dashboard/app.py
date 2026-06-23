@@ -281,9 +281,11 @@ def make_sparkline(data, color="#3B82F6"):
         margin=dict(l=0, r=0, t=0, b=0),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        height=80,
-        width=80
+        autosize=True
     )
+    fig.update_xaxes(visible=False)
+    fig.update_yaxes(visible=False)
+    fig.update_traces(cliponaxis=True)
     return fig
 
 # ── PLOTLY PREMIUM STYLE ─────────────────────────────────────
@@ -511,7 +513,7 @@ if page == "🏠 Executive Dashboard":
                 <span style="font-size: 12px; color: #10B981; font-weight: 600;">▲ {mom_rev} MoM</span>
                 """, unsafe_allow_html=True)
             with c_r:
-                st.plotly_chart(make_sparkline(monthly_revenue_arr, "#10B981"), use_container_width=False, config={'displayModeBar': False})
+                st.plotly_chart(make_sparkline(monthly_revenue_arr, "#10B981"), use_container_width=True, config={'displayModeBar': False})
                 
     with col_k2:
         with st.container(border=True):
@@ -523,7 +525,7 @@ if page == "🏠 Executive Dashboard":
                 <span style="font-size: 12px; color: #10B981; font-weight: 600;">▲ {mom_orders} MoM</span>
                 """, unsafe_allow_html=True)
             with c_r:
-                st.plotly_chart(make_sparkline(monthly_orders_arr, "#3B82F6"), use_container_width=False, config={'displayModeBar': False})
+                st.plotly_chart(make_sparkline(monthly_orders_arr, "#3B82F6"), use_container_width=True, config={'displayModeBar': False})
                 
     with col_k3:
         with st.container(border=True):
@@ -535,7 +537,7 @@ if page == "🏠 Executive Dashboard":
                 <span style="font-size: 12px; color: #10B981; font-weight: 600;">▲ {mom_cust} MoM</span>
                 """, unsafe_allow_html=True)
             with c_r:
-                st.plotly_chart(make_sparkline(monthly_customers_arr, "#8B5CF6"), use_container_width=False, config={'displayModeBar': False})
+                st.plotly_chart(make_sparkline(monthly_customers_arr, "#8B5CF6"), use_container_width=True, config={'displayModeBar': False})
                 
     with col_k4:
         with st.container(border=True):
@@ -547,7 +549,7 @@ if page == "🏠 Executive Dashboard":
                 <span style="font-size: 12px; color: #10B981; font-weight: 600;">▲ {mom_aov} MoM</span>
                 """, unsafe_allow_html=True)
             with c_r:
-                st.plotly_chart(make_sparkline(monthly_aov_arr, "#F59E0B"), use_container_width=False, config={'displayModeBar': False})
+                st.plotly_chart(make_sparkline(monthly_aov_arr, "#F59E0B"), use_container_width=True, config={'displayModeBar': False})
 
     # Row 2 Metrics
     col_k5, col_k6, col_k7, col_k8 = st.columns(4)
