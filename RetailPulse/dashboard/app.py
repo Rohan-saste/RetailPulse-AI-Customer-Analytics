@@ -106,7 +106,7 @@ def inject_premium_ui():
         }
         
         /* Text color overrides inside main containers */
-        div[data-testid="stVerticalBlockBorderWrapper"] *, div[data-testid="metric-container"] * {
+        div[data-testid="stVerticalBlockBorderWrapper"], div[data-testid="metric-container"] {
             color: #1E293B !important;
         }
         
