@@ -77,13 +77,15 @@ def inject_premium_ui():
         section[data-testid="stSidebar"] h2, 
         section[data-testid="stSidebar"] h3 {
             color: #FFFFFF !important;
+            text-shadow: none !important;
         }
         
         /* Modern Sidebar Navigation styling */
         section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] *,
         section[data-testid="stSidebar"] .stRadio label * {
-            color: #1E293B !important;
+            color: #CBD5E1 !important;
             font-weight: 600;
+            text-shadow: none !important;
         }
         section[data-testid="stSidebar"] div[role="radiogroup"] > label {
             background: transparent;
@@ -134,6 +136,7 @@ def inject_premium_ui():
             color: #0F172A !important;
             font-weight: 800 !important;
             letter-spacing: -0.5px !important;
+            text-shadow: none !important;
         }
         
         /* Glassmorphism Banner Header Style */
@@ -281,7 +284,8 @@ def make_sparkline(data, color="#3B82F6"):
         margin=dict(l=0, r=0, t=0, b=0),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        autosize=True
+        autosize=True,
+        height=80
     )
     fig.update_xaxes(visible=False)
     fig.update_yaxes(visible=False)

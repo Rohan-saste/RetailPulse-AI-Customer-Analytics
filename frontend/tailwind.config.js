@@ -10,15 +10,16 @@ export default {
         sans: ['Plus Jakarta Sans', 'sans-serif'],
       },
       colors: {
-        background: '#F8FAFC',
-        sidebar: '#0F172A',
+        primary: '#2563EB',
+        success: '#22C55E',
+        warning: '#F59E0B',
+        danger: '#EF4444',
+        background: '#F1F5F9',
         card: '#FFFFFF',
-        textMain: '#1E293B',
-        textMuted: '#94A3B8',
-        accentBlue: '#3B82F6',
-        accentGreen: '#10B981',
-        accentPurple: '#8B5CF6',
-        accentOrange: '#F59E0B'
+        textMain: '#0F172A',
+        textMuted: '#64748B',
+        borderLine: '#E2E8F0',
+        sidebar: '#0F172A'
       }
     },
   },
