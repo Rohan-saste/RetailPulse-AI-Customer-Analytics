@@ -1152,7 +1152,7 @@ elif page == "📄 Reports & Download Center":
             
             # Excel export function
             output = io.BytesIO()
-            with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+           with pd.ExcelWriter(output, engine='openpyxl') as writer:
                 # Sheet 1: Sales Summary
                 df.head(2000).to_excel(writer, sheet_name='Sales Summary', index=False)
                 # Sheet 2: Segments
