@@ -9,4 +9,4 @@ openpyxl==3.1.2
 xlsxwriter==3.2.0
 setuptools
 wheel
-XlsxWriter==3.2.0
+
